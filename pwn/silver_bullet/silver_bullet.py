@@ -1,8 +1,6 @@
 from pwn import *
-context.log_level = 'debug'
-context.terminal = ['gnome-terminal', '-x', 'bash', '-c']
-elf = ELF('./silver_bullet')
 
+elf = ELF('./silver_bullet')
 libc = ELF('./libc_32.so.6')
 p = remote('chall.pwnable.tw',10103)
 
