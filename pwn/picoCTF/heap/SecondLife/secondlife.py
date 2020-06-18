@@ -2,7 +2,7 @@ from pwn import *
 
 context.binary = './vuln'
 
-sh = ssh(host='2019shell1.picoctf.com', user='jamesyoung', password='pBCNtaNiAc7Fs&F')
+sh = ssh(host='2019shell1.picoctf.com', user='jamesyoung', password='***************')
 server = sh.process('vuln', cwd='/problems/secondlife_4_5c2075e2c32bb7f481b1d866564b1f26')
 
 print(server.recvline())

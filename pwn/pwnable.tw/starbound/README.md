@@ -1,2 +1,2 @@
 # Starbound
-This challenge is not finished.
+This challenge is not finished yet.

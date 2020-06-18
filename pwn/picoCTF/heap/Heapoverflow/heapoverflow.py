@@ -2,7 +2,7 @@ from pwn import *
 
 context.binary = './vuln'
 
-sh = ssh(host='2019shell1.picoctf.com', user='jamesyoung', password='pBCNtaNiAc7Fs&F')
+sh = ssh(host='2019shell1.picoctf.com', user='jamesyoung', password='***************')
 server = sh.process('vuln', cwd='/problems/heap-overflow_6_b4a1244485bc8fdf27646e1db83dc360')
 
 print(server.recvline())

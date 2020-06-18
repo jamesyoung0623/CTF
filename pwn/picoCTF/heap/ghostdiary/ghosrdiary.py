@@ -1,7 +1,7 @@
 from pwn import *
 from time import sleep
 
-sh = ssh(host='2019shell1.picoctf.com', user='jamesyoung', password='pBCNtaNiAc7Fs&F')
+sh = ssh(host='2019shell1.picoctf.com', user='jamesyoung', password='***************')
 server = sh.process('ghostdiary', cwd='/problems/ghost-diary_5_7e39864bc6dc6e66a1ac8f4632e5ffba')
 
 def flush():
