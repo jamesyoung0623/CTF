@@ -32,3 +32,28 @@ The zip file was locked, so I use `fcrackzip` and common password in rockyou.txt
 fcrackzip -D -p rockyou.txt -u foo.zip
 ```
 And the password of the zip file was *lafire*. Flag is in Demon.png
+
+***
+## Crypto
+### T-Rex
+Tyrannosaurus-rex is an nihilist. [prob](https://github.com/jamesyoung0623/CTF/blob/master/myFirstCTF2020/prob)
+**SOL:** Like substitution cipher(?)
+I wrote an execution file[T-Rex](https://github.com/jamesyoung0623/CTF/blob/master/myFirstCTF2020/T-Rex) to quickly solve this problem. Usage as
+```bash
+./T-rex <input_file>
+```
+The source code of T-Rex was [trex.cpp](https://github.com/jamesyoung0623/CTF/blob/master/myFirstCTF2020/trex.cpp)
+
+### KcufsJ
+Brontosaurus peek at last year’s problems with a long neck and picked up "KcufsJ". [KcufsJ](https://github.com/jamesyoung0623/CTF/blob/master/myFirstCTF2020/KcufsJ)
+**SOL:** *KcufsJ* is the inverse of *Jsfuck*, an esoteric subset of JavaScript. So inverse the context provided, and execute them in chrome console.
+
+### Blowfish
+Don’t poke the puffer, it is poisonous. [user.pickle](https://github.com/jamesyoung0623/CTF/blob/master/myFirstCTF2020/user.pickle) [prob.py](https://github.com/jamesyoung0623/CTF/blob/master/myFirstCTF2020/server.py)
+```bash 
+nc 60.250.197.227 12001
+```
+**SOL:** The `TOKEN` was encrypted with CTR mode, and we knew the plaintext(user.pickle)!
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/CTR_encryption_2.svg/902px-CTR_encryption_2.svg.png" alt="CTR" style="zoom:80%;" />
+So by XORing the given token and the plaintext, we now can fake a new TOKEN and get the flag!
+> See [blowfish.py](https://github.com/jamesyoung0623/CTF/blob/master/myFirstCTF2020/blowfish.py)
