@@ -4,7 +4,7 @@ This is a write up of the contest [My First CTF](https://mfctf.ais3.org/challeng
 ## MISC
 ### Piquero
 > I can’t see the flag. Where is it?
-![Piquero.jpg](https://github.com/jamesyoung0623/CTF/blob/master/myFirstCTF2020/Piquero.jpg")
+<img src="https://github.com/jamesyoung0623/CTF/blob/master/myFirstCTF2020/Piquero.jpg" alt="Piquero" style="zoom:15%;" />
 
 >> 這是點字！
 
