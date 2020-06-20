@@ -15,15 +15,15 @@ Students who fail to summon will be dropped out.
 ```bash
 xxd Karuefo.png | grep IEND 
 ```
-we will see ``001f6d20: f940 72ae 0000 0000 4945 4e44 ae42 6082  .@r.....IEND.B`.``
+we will see ``001f6d20: f940 72ae 0000 0000 4945 4e44 ae42 6082  .@r.....IEND.B`.``.
 It meens that the terminate byte of the png is 001f6d20.
 Now check for the 001f6d30 byte
 ```bash
 xxd Karuefo.png | grep 001f6d30 
 ```
-And we can see there's `PK` in the line. `PK` are the initials of Phil Katz, the inventor of the zip file, and indicate that a zip file starts at that point.
+The result was `001f6d30: 504b 0304 0a00 0000 0000 408a bd50 0000  PK........@..P..` and we can see there's `PK` in the line. `PK` are the initials of Phil Katz, the inventor of the zip file, and indicate that a zip file starts at that point.
 
-As `0x001f6d30 = 2059568`
+As *0x001f6d30 = 2059568*
 ```bash
 dd if=Karuego.png bs=1 skip=2059568 of=foo.zip
 ```
