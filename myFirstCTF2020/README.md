@@ -45,11 +45,11 @@ I wrote an execution file[T-Rex](https://github.com/jamesyoung0623/CTF/blob/mast
 The source code of T-Rex was [trex.cpp](https://github.com/jamesyoung0623/CTF/blob/master/myFirstCTF2020/trex.cpp)
 
 ### KcufsJ
-Brontosaurus peek at last year’s problems with a long neck and picked up "KcufsJ". [KcufsJ](https://github.com/jamesyoung0623/CTF/blob/master/myFirstCTF2020/KcufsJ)
+Brontosaurus peek at last year’s problems with a long neck and picked up "[KcufsJ](https://github.com/jamesyoung0623/CTF/blob/master/myFirstCTF2020/KcufsJ)". <br>
 **SOL:** *KcufsJ* is the inverse of *Jsfuck*, an esoteric subset of JavaScript. So inverse the context provided, and execute them in chrome console.
 
 ### Blowfish
-Don’t poke the puffer, it is poisonous. [user.pickle](https://github.com/jamesyoung0623/CTF/blob/master/myFirstCTF2020/user.pickle) [prob.py](https://github.com/jamesyoung0623/CTF/blob/master/myFirstCTF2020/server.py)
+Don’t poke the puffer, it is poisonous. refs: [user.pickle](https://github.com/jamesyoung0623/CTF/blob/master/myFirstCTF2020/user.pickle) ,[prob.py](https://github.com/jamesyoung0623/CTF/blob/master/myFirstCTF2020/server.py)
 ```bash 
 nc 60.250.197.227 12001
 ```
