@@ -1,5 +1,5 @@
-# CTF
-NTUEE NMLab, 2020 spring.
+# My First CTF
+This is a write up of the contest [My First CTF](https://mfctf.ais3.org/challenges)
 
 ## MISC
 ### Piquero
